@@ -1,42 +1,21 @@
+const datejs = require ('datejs')
 
-
-// combineUsers.js
-require('datejs'); // load datejs globally
-
-function combineUsers(...args) {
-  // Initialize return object
-  const combinedObject = {
+function combineUsers (...args){
+  const combinedObject={
     users: []
   };
 
-  // Loop through args and merge arrays into users
-  for (const arr of args) {
-    combinedObject.users.push(...arr);
+  for (const array of args){
+    combinedObject.users=[...combinedObject.users, ...array];
   }
 
-  // Add today's date in M/d/yyyy format
-  const today = new Date().toString("M/d/yyyy");
-  combinedObject.merge_date = today;
+ const today = new Date();
+ const dateStr =`${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}` ;
 
-  // Return the combined object
-  return combinedObject;
+ combinedObject.merge_date = dateStr;
+
+ return combinedObject;
 }
-
-module.exports = combineUsers;
-
-
-
-
-// index.js
-const combineUsers = require('./combineUsers');
-
-// Example usage
-const arr1 = ['alice', 'bob'];
-const arr2 = ['charlie', 'diana'];
-const arr3 = ['eve'];
-
-console.log(combineUsers(arr1, arr2, arr3));
-
 
 
 module.exports = {
